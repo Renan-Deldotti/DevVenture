@@ -1,10 +1,12 @@
 package com.teste.fakemessenger;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
@@ -24,6 +26,12 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         editTextMessage = findViewById(R.id.editText_message);
         textViewAnswer = findViewById(R.id.textView_answer);
+
+        if (savedInstanceState == null){
+            Toast.makeText(this, "savedInstanceState == null", Toast.LENGTH_SHORT).show();
+        }else{
+            textViewAnswer.setText(savedInstanceState.getString("savedtext"));
+        }
     }
 
     public void callNewActivity(View view) {
@@ -48,6 +56,14 @@ public class MainActivity extends AppCompatActivity {
                     textViewAnswer.setText(data.getStringExtra(NewActivity.ANSWER_ID));
                 }
             }
+        }
+    }
+
+    @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        if (!TextUtils.isEmpty(textViewAnswer.getText().toString().trim())){
+            outState.putString("savedtext",textViewAnswer.getText().toString().trim());
         }
     }
 }

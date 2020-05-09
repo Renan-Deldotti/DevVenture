@@ -10,31 +10,34 @@
     <EditText
         android:id="@+id/editText_message"
         android:layout_width="match_parent"
-        android:layout_margin="16dp"
         android:layout_height="wrap_content"
-        android:hint="@string/editText_msg_hint"
+        android:layout_margin="16dp"
         android:autofillHints="@string/editText_msg_hint"
+        android:hint="@string/editText_msg_hint"
         android:inputType="textCapSentences" />
+
     <Button
         android:id="@+id/button_new_activity"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/call_new_activity"
         android:layout_marginHorizontal="16dp"
-        android:onClick="callNewActivity"/>
+        android:onClick="callNewActivity"
+        android:text="@string/call_new_activity" />
+
     <Button
         android:id="@+id/button_new_activity_result"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/button_label_call_answer"
         android:layout_marginHorizontal="16dp"
-        android:onClick="callNewActivityForResult"/>
+        android:onClick="callNewActivityForResult"
+        android:text="@string/button_label_call_answer" />
+
     <TextView
         android:id="@+id/textView_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_margin="16dp"
         android:gravity="center"
-        tools:text="Answered text"
-        android:layout_margin="16dp"/>
+        tools:text="Answered text" />
 
 </LinearLayout>
