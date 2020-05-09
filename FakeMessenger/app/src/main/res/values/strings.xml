@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">FakeMessenger</string>
+    <string name="call_new_activity">CALL ACTIVITY</string>
+</resources>
