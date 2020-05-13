@@ -25,6 +25,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 RadioButton radioButton = findViewById(checkedId);
+                //String s = ((RadioButton) findViewById(checkedId)).getText().toString();
                 Toast.makeText(MainActivity.this, radioButton.getText(), Toast.LENGTH_SHORT).show();
             }
         });
