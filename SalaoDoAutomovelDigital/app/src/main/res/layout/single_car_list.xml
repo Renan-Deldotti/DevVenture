@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
+
         <ImageView
             android:id="@+id/imageView_car"
             android:layout_width="match_parent"
@@ -28,7 +29,7 @@
             android:layout_marginTop="-40dp"
             android:textColor="@android:color/white"
             android:textSize="24sp"
-            tools:text="Carro Um" />
+            tools:text="Camaro"/>
 
         <TextView
             android:id="@+id/textView_potencia"
@@ -39,7 +40,7 @@
             android:layout_marginEnd="8dp"
             android:layout_marginBottom="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            tools:text="Potencia: 215hp" />
+            android:text="@string/potencia" />
 
         <TextView
             android:id="@+id/textView_fabricacao"
@@ -47,8 +48,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:textAppearance="@style/TextAppearance.AppCompat"
-            tools:text="Fabricação: 1990" />
+            android:text="@string/fabricacao" />
     </LinearLayout>
-
 
 </androidx.cardview.widget.CardView>
