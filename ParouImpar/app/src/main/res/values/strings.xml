@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Par ou Impar</string>
+    <string name="jogador">Jogador</string>
+    <string name="maquina">Máquina</string>
+    <string name="x">X</string>
+    <string name="escolha_da_maquina">Escolha da Máquina</string>
+    <string name="par">Par</string>
+    <string name="impar">Ímpar</string>
+</resources>
