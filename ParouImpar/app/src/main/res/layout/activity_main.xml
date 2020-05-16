@@ -124,6 +124,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="selectOption"
             android:text="@string/_1"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/white" />
@@ -133,6 +134,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="selectOption"
             android:text="@string/_2"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/white" />
@@ -142,6 +144,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="selectOption"
             android:text="@string/_3"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/white" />
@@ -151,6 +154,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="selectOption"
             android:text="@string/_4"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/white" />
@@ -160,6 +164,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:onClick="selectOption"
             android:text="@string/_5"
             android:textAppearance="@style/TextAppearance.AppCompat.Large"
             android:textColor="@android:color/white" />

@@ -11,4 +11,8 @@
     <string name="_3">3</string>
     <string name="_2">2</string>
     <string name="_1">1</string>
+    <string name="restart">Restart</string>
+    <string name="iniciar">Começar o jogo</string>
+    <string name="winner">Você venceu!</string>
+    <string name="loser">Você perdeu!</string>
 </resources>
