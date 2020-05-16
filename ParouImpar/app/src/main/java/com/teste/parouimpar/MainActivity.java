@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
     private static final int IMPAR = 1;
 
     private TextView textViewPlacarJogador, textViewPlacarMaquina, textViewEscolhaMaquina, textViewWinner;
-    private Button buttonPar, buttonImpar;
     private int selectVal = 0;
 
     @Override
@@ -32,8 +31,8 @@ public class MainActivity extends AppCompatActivity {
         textViewPlacarMaquina = findViewById(R.id.placar_maquina);
         textViewEscolhaMaquina = findViewById(R.id.textView_escolha_maquina);
         textViewWinner = findViewById(R.id.textView_winner);
-        buttonPar = findViewById(R.id.button_par);
-        buttonImpar = findViewById(R.id.button_impar);
+        Button buttonPar = findViewById(R.id.button_par);
+        Button buttonImpar = findViewById(R.id.button_impar);
 
 
         restartAll();
@@ -62,7 +61,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void checkWinner(int selectVal, int guess) {
-        int escolhaMaquina = new Random().nextInt(5);
+        int escolhaMaquina = new Random().nextInt(6);
 
         boolean isPar = ((selectVal + escolhaMaquina) % 2) == 0;
 
@@ -70,29 +69,19 @@ public class MainActivity extends AppCompatActivity {
 
         textViewEscolhaMaquina.setText(String.valueOf(escolhaMaquina));
 
-        if (guess == PAR){
-            if (isPar){
-                isWinner = true;
-            }else{
-                isWinner = false;
-            }
-        }else{
-            if (isPar){
-                isWinner = false;
-            }else{
-                isWinner = true;
-            }
+        if (guess == PAR && isPar){
+            isWinner = true;
+        }else if (guess == IMPAR && !isPar){
+            isWinner = true;
         }
 
         if (isWinner){
-            textViewWinner.setText(getResources().getString(R.string.winner));
-            int placarJogador = Integer.parseInt(textViewPlacarJogador.getText().toString().trim());
-            placarJogador++;
+            textViewWinner.setText(R.string.winner);
+            int placarJogador = Integer.parseInt(textViewPlacarJogador.getText().toString().trim()) + 1;
             textViewPlacarJogador.setText(String.valueOf(placarJogador));
         }else{
-            textViewWinner.setText(getResources().getString(R.string.loser));
-            int placarMaquina = Integer.parseInt(textViewPlacarMaquina.getText().toString().trim());
-            placarMaquina++;
+            textViewWinner.setText(R.string.loser);
+            int placarMaquina = Integer.parseInt(textViewPlacarMaquina.getText().toString().trim()) + 1;
             textViewPlacarMaquina.setText(String.valueOf(placarMaquina));
         }
     }
@@ -123,10 +112,8 @@ public class MainActivity extends AppCompatActivity {
     public void selectOption(View v){
         try {
             selectVal = Integer.parseInt(((Button)v).getText().toString());
-            Log.e(TAG,""+selectVal);
         } catch (NumberFormatException e) {
             selectVal = 0;
-            Toast.makeText(this, ""+e.toString(), Toast.LENGTH_SHORT).show();
             Log.e(TAG,"Error: "+e);
         }
     }
