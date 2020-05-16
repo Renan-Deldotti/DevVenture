@@ -7,6 +7,7 @@
     tools:context=".MainActivity">
 
     <ImageButton
+        android:id="@+id/buttonTakePicture"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_margin="8dp"
