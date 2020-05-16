@@ -122,7 +122,6 @@ public class MainActivity extends AppCompatActivity {
 
     public void selectOption(View v){
         try {
-            Button button = findViewById(v.getId());
             selectVal = Integer.parseInt(((Button)v).getText().toString());
             Log.e(TAG,""+selectVal);
         } catch (NumberFormatException e) {
