@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="16dp"
+    android:layout_marginTop="8dp"
+    android:orientation="vertical"
+    android:padding="8dp">
+
+    <ImageView
+        android:id="@+id/imageView_car"
+        android:layout_width="match_parent"
+        android:layout_height="120dp"
+        android:contentDescription="@string/car_image"
+        android:scaleType="fitXY"
+        tools:src="@tools:sample/backgrounds/scenic" />
+
+    <TextView
+        android:id="@+id/textView_carName"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="end"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="-40dp"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        tools:text="Carro Um" />
+
+
+    <TextView
+        android:id="@+id/textView_potencia"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        tools:text="Potencia: 215hp" />
+
+    <TextView
+        android:id="@+id/textView_fabricacao"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:textAppearance="@style/TextAppearance.AppCompat"
+        tools:text="Fabricação: 1990" />
+
+</LinearLayout>
