@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">Cartao de Visita</string>
+    <string name="foto_de_perfil">foto de perfil</string>
+    <string name="nome">Nome</string>
+    <string name="empresa">Empresa</string>
+    <string name="email">email</string>
+    <string name="criar">Criar</string>
+    <string name="person_icon">Person Icon</string>
+    <string name="modelo_gerado">Modelo gerado</string>
 </resources>
