@@ -10,6 +10,5 @@
         android:id="@+id/recyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_margin="16dp"
-        tools:listitem="@layout/support_simple_spinner_dropdown_item"/>
+        tools:listitem="@layout/list_item"/>
 </androidx.constraintlayout.widget.ConstraintLayout>

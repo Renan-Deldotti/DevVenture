@@ -8,11 +8,11 @@ import android.os.Bundle;
 import android.util.Log;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String TAG = MainActivity.class.getSimpleName();
     private List<String> stringList = new ArrayList<>();
     private RecyclerView recyclerView;
 
@@ -25,14 +25,17 @@ public class MainActivity extends AppCompatActivity {
 
         recyclerView = findViewById(R.id.recyclerView);
         recyclerView.setLayoutManager(new LinearLayoutManager(getApplicationContext()));
-        RecyclerAdapter recyclerAdapter = new RecyclerAdapter();
-        recyclerView.setAdapter(recyclerAdapter);
+        RecyclerViewAdapter recyclerViewAdapter = new RecyclerViewAdapter(stringList);
+        recyclerView.setHasFixedSize(true);
+        recyclerView.setAdapter(recyclerViewAdapter);
+
+
     }
 
     private void populateList(){
-        for (int i = 0; i < 20;i++){
-            stringList.add("Aluno "+i);
+        for (int i = 1; i <= 20;i++){
+            stringList.add("Item "+i);
         }
-        Log.e(MainActivity.class.getSimpleName(), stringList.toString());
+        //Log.d(TAG, stringList.toString());
     }
 }
