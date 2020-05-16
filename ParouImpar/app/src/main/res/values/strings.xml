@@ -6,4 +6,9 @@
     <string name="escolha_da_maquina">Escolha da Máquina</string>
     <string name="par">Par</string>
     <string name="impar">Ímpar</string>
+    <string name="_4">4</string>
+    <string name="_5">5</string>
+    <string name="_3">3</string>
+    <string name="_2">2</string>
+    <string name="_1">1</string>
 </resources>
