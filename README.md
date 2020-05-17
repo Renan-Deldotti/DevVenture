@@ -1,2 +1,2 @@
-# VenturusLives
-Arquivos dos projetos desenvolvidos durante as lives
+# DevVenture
+Arquivos feitos durantes as aulas
