@@ -6,11 +6,15 @@ import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 
 import android.app.PictureInPictureParams;
+import android.content.res.Configuration;
 import android.os.Build;
 import android.os.Bundle;
 import android.util.Rational;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
 
 public class MainActivity extends AppCompatActivity implements FirstFragment.OnFragmentMessageChanged {
 
@@ -18,6 +22,9 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
     FragmentTransaction fragmentTransaction;
     FirstFragment firstFragment;
     SecondFragment secondFragment;
+
+    FrameLayout frameLayoutFragment1;
+    FrameLayout frameLayoutFragment2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +40,8 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
                 .add(R.id.fragment2_Container,secondFragment)
                 .commit();
 
+        frameLayoutFragment1 = findViewById(R.id.fragment1_Container);
+        frameLayoutFragment2 = findViewById(R.id.fragment2_Container);
     }
 
     @Override
@@ -57,11 +66,22 @@ public class MainActivity extends AppCompatActivity implements FirstFragment.OnF
             //DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
             //Rational rational = new Rational(Math.round(displayMetrics.xdpi), Math.round(displayMetrics.ydpi)); // Auto
             //Rational rational = new Rational( 16, 9); // 16:9
-            Rational rational = new Rational( 4, 3); // 4:3
+            //Rational rational = new Rational( 4, 3); // 4:3
+            Rational rational = new Rational( frameLayoutFragment2.getWidth(), frameLayoutFragment2.getHeight());
             PictureInPictureParams params = new PictureInPictureParams.Builder().setAspectRatio(rational).build();
             enterPictureInPictureMode(params);
-
         }
+    }
+
+    @Override
+    public void onPictureInPictureModeChanged(boolean isInPictureInPictureMode, Configuration newConfig) {
+        if (isInPictureInPictureMode){
+            frameLayoutFragment1.setVisibility(View.GONE);
+        }else {
+            frameLayoutFragment1.setVisibility(View.VISIBLE);
+        }
+        super.onPictureInPictureModeChanged(isInPictureInPictureMode, newConfig);
+
     }
 
     @Override
