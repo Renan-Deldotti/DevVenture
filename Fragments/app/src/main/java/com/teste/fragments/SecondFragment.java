@@ -7,6 +7,7 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 
 /**
@@ -14,15 +15,33 @@ import android.view.ViewGroup;
  */
 public class SecondFragment extends Fragment {
 
+    public static final String FRAGMENT2_MESSAGE = "FRAG2_MSG";
+
+    private TextView messageTextView;
+
     public SecondFragment() {
         // Required empty public constructor
     }
 
+    public static SecondFragment newInstance(String message){
+        SecondFragment secondFragment = new SecondFragment();
+        Bundle bundle = new Bundle();
+        bundle.putString(FRAGMENT2_MESSAGE,message);
+        secondFragment.setArguments(bundle);
+        return secondFragment;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_second, container, false);
+        View v = inflater.inflate(R.layout.fragment_second, container, false);
+        messageTextView = v.findViewById(R.id.fragment2_textView);
+
+        if (getArguments() != null){
+            messageTextView.setText(getArguments().getString(FRAGMENT2_MESSAGE));
+        }
+
+        return v;
     }
 }

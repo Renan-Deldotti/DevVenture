@@ -13,9 +13,8 @@
         android:layout_height="0dp"
         android:layout_weight="1" />
 
-    <fragment
-        android:id="@+id/fragment2"
-        class="com.teste.fragments.SecondFragment"
+    <FrameLayout
+        android:id="@+id/fragment2_Container"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1" />

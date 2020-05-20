@@ -8,31 +8,30 @@ import androidx.fragment.app.FragmentTransaction;
 import android.app.PictureInPictureParams;
 import android.os.Build;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Rational;
 import android.view.Menu;
-import android.view.MenuInflater;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.FrameLayout;
-import android.widget.Toast;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements FirstFragment.OnFragmentMessageChanged {
 
     FragmentManager fragmentManager;
     FragmentTransaction fragmentTransaction;
     FirstFragment firstFragment;
+    SecondFragment secondFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        firstFragment = new FirstFragment();
+        firstFragment = FirstFragment.newInstance("Este é um novo fragment!");
+        secondFragment = SecondFragment.newInstance("Segunda Fragment");
 
         fragmentManager = getSupportFragmentManager();
         fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.add(R.id.fragment1_Container, firstFragment).commit();
+        fragmentTransaction.add(R.id.fragment1_Container, firstFragment)
+                .add(R.id.fragment2_Container,secondFragment)
+                .commit();
 
     }
 
@@ -63,5 +62,19 @@ public class MainActivity extends AppCompatActivity {
             enterPictureInPictureMode(params);
 
         }
+    }
+
+    @Override
+    public void onMessageChanged(String message) {
+        updateFragment2(message);
+    }
+
+    private void updateFragment2(String message){
+        SecondFragment secondFragment = SecondFragment.newInstance(message);
+        getSupportFragmentManager()
+                .beginTransaction()
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE)
+                .replace(R.id.fragment2_Container, secondFragment)
+                .commit();
     }
 }
