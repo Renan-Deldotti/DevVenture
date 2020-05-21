@@ -14,7 +14,7 @@ import android.widget.Button;
 import android.widget.Toast;
 
 
-public class SelectUserFragment extends Fragment {
+public class SelectUserFragment extends Fragment implements View.OnClickListener{
 
     private static OnSelectUserListener listener;
 
@@ -49,17 +49,18 @@ public class SelectUserFragment extends Fragment {
         button2 = v.findViewById(R.id.button2);
         button3 = v.findViewById(R.id.button3);
 
-        button1.setOnClickListener(clickListener);
-        button2.setOnClickListener(clickListener);
-        button3.setOnClickListener(clickListener);
+        button1.setOnClickListener(this);
+        button2.setOnClickListener(this);
+        button3.setOnClickListener(this);
 
         // Caso existam parametros checar o objeto e pegar os dados
 
         return v;
     }
 
-    public static void selectUserOnClick(View view){
-        switch (view.getId()){
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()){
             case R.id.button1:
                 listener.onUserSelected(1);
                 break;
@@ -71,7 +72,7 @@ public class SelectUserFragment extends Fragment {
         }
     }
 
-    private View.OnClickListener clickListener = new View.OnClickListener() {
+    /*private View.OnClickListener clickListener = new View.OnClickListener() {
         @Override
         public void onClick(View v) {
             switch (v.getId()){
@@ -85,7 +86,7 @@ public class SelectUserFragment extends Fragment {
                     listener.onUserSelected(3);
             }
         }
-    };
+    };*/
 
     public interface OnSelectUserListener {
         void onUserSelected(int id);
