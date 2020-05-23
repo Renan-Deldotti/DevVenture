@@ -4,8 +4,6 @@ import android.os.AsyncTask;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import org.w3c.dom.Text;
-
 public class MyAsyncTask extends AsyncTask<Void, Integer, Integer> {
 
     private TextView textViewST;
