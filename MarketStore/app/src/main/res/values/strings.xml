@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">Market Store</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="open_cart">Open Cart</string>
+    <string name="preco">Preço: R$</string>
+    <string name="lista_de_compras">Lista de Compras</string>
+</resources>
