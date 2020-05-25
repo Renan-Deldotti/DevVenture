@@ -10,6 +10,7 @@ import com.teste.playwithroom.R;
 import com.teste.playwithroom.adapters.PlayGamesAdapter;
 import com.teste.playwithroom.database.DatabaseConnection;
 import com.teste.playwithroom.database.PlayGameDao_Impl;
+import com.teste.playwithroom.database.PlayGameOperations;
 import com.teste.playwithroom.databinding.ActivityMainBinding;
 import com.teste.playwithroom.model.PlayGame;
 
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private List<PlayGame> gameList;
     private DatabaseConnection connection;
     private PlayGamesAdapter adapter;
+    private PlayGameOperations operations;
 
 
     @Override
@@ -34,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
         gameList = new ArrayList<>();
         connection = DatabaseConnection.getInstance(this);
         adapter = new PlayGamesAdapter(gameList);
+        operations = new PlayGameOperations(this);
 
         binding.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         binding.recyclerView.setAdapter(adapter);
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 PlayGame playGame = new PlayGame("Amarelinha",10,"Pular amarelinha");
-                connection.playGameDao().insert(playGame);
+                operations.insertPlayGame(playGame);
             }
         });
 
@@ -50,7 +53,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 gameList.clear();
-                gameList.addAll(connection.playGameDao().getAllGames());
+                gameList.addAll(operations.getAllGames());
                 binding.recyclerView.scrollToPosition(adapter.getItemCount() - 1);
                 adapter.notifyDataSetChanged();
             }
