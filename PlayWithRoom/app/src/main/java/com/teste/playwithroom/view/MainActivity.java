@@ -24,7 +24,6 @@ public class MainActivity extends AppCompatActivity {
     private PlayGamesAdapter adapter;
 
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
