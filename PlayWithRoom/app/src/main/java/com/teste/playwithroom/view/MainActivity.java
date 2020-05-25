@@ -63,7 +63,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (!gameList.isEmpty()){
-                    connection.playGameDao().delete((gameList.size() - 1));
+                    operations.deleteLastItem(gameList.get(gameList.size() - 1));
                     adapter.notifyDataSetChanged();
                 }
             }

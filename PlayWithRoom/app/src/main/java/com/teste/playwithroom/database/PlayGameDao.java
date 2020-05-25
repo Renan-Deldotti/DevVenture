@@ -1,6 +1,7 @@
 package com.teste.playwithroom.database;
 
 import androidx.room.Dao;
+import androidx.room.Delete;
 import androidx.room.Insert;
 import androidx.room.Query;
 
@@ -14,6 +15,9 @@ public interface PlayGameDao {
     @Insert
     void insert(PlayGame game);
 
+    @Delete
+    void delete(PlayGame game);
+
     @Query("SELECT * FROM PlayGame")
     List<PlayGame> getAllGames();
 
@@ -21,5 +25,5 @@ public interface PlayGameDao {
     PlayGame getById(int id);
 
     @Query("DELETE FROM PlayGame WHERE id=:id")
-    void delete(int id);
+    void deleteId(int id);
 }

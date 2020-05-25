@@ -9,9 +9,9 @@ import java.util.List;
 
 public class PlayGameOperations {
 
-    DatabaseConnection connection;
+    private DatabaseConnection connection;
     private Context context;
-    List<PlayGame> gameList;
+    private List<PlayGame> gameList;
 
     public PlayGameOperations(Context context){
         this.context = context;
@@ -29,7 +29,11 @@ public class PlayGameOperations {
         return gameList;
     }
 
-    public class InsertGameTask extends AsyncTask<PlayGame, Void, Void>{
+    public void deleteLastItem(PlayGame game){
+        new DeleteGameTask().execute(game);
+    }
+
+    private class InsertGameTask extends AsyncTask<PlayGame, Void, Void>{
 
         @Override
         protected Void doInBackground(PlayGame... playGames) {
@@ -38,7 +42,7 @@ public class PlayGameOperations {
         }
     }
 
-    public class GetAllGamesTask extends AsyncTask<Void,Void,List<PlayGame>>{
+    private class GetAllGamesTask extends AsyncTask<Void,Void,List<PlayGame>>{
         @Override
         protected List<PlayGame> doInBackground(Void... voids) {
             return connection.playGameDao().getAllGames();
@@ -47,6 +51,14 @@ public class PlayGameOperations {
         @Override
         protected void onPostExecute(List<PlayGame> playGames) {
             gameList = playGames;
+        }
+    }
+
+    private class DeleteGameTask extends AsyncTask<PlayGame, Void, Void>{
+        @Override
+        protected Void doInBackground(PlayGame... playGames) {
+            connection.playGameDao().delete(playGames[0]);
+            return null;
         }
     }
 }
