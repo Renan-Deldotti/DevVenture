@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">Canil Room ViewModel</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="dog_photo">Dog photo</string>
+    <string name="functions">Bred for:</string>
+    <string name="group">Breed group:</string>
+    <string name="life_span">Life span:</string>
+    <string name="temperament">Temperament:</string>
+    <string name="weight">Weight:</string>
+    <string name="height">Height:</string>
+    <string name="country_code">Country Code</string>
 </resources>

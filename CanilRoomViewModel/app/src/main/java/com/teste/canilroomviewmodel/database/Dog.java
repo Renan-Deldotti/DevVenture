@@ -1,29 +1,47 @@
 package com.teste.canilroomviewmodel.database;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
-//@JsonIgnoreProperties({"id"})
-public class Dog {
+
+@JsonIgnoreProperties({"history"})
+public class Dog implements Serializable {
+
+    @JsonIgnore
+    public static final String MeasureInMetric = "metric";
+    public static final String MeasureInImperial = "imperial";
 
     private String id;
     private String name;
     private String bred_for;
     private String breed_group;
+    private String origin;
+    private String country_code;
+    private String description;
     private String life_span;
     private String temperament;
-    private List<String> weight;
-    private List<String> height;
+    @JsonProperty("weight")
+    private Map<String, Object> weight = new HashMap<>();
+    @JsonProperty("height")
+    private Map<String, Object> height = new HashMap<>();
 
     public Dog() {
     }
 
-    public Dog(String id, String name, String bred_for, String breed_group, String life_span, String temperament, List<String> weight, List<String> height) {
+    public Dog(String id, String name, String bred_for, String breed_group, String origin, String country_code, String description, String life_span, String temperament, Map<String, Object> weight, Map<String, Object> height) {
         this.id = id;
         this.name = name;
         this.bred_for = bred_for;
         this.breed_group = breed_group;
+        this.origin = origin;
+        this.country_code = country_code;
+        this.description = description;
         this.life_span = life_span;
         this.temperament = temperament;
         this.weight = weight;
@@ -32,6 +50,14 @@ public class Dog {
 
     public String getId() {
         return id;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
     }
 
     public void setId(String id) {
@@ -62,6 +88,22 @@ public class Dog {
         this.breed_group = breed_group;
     }
 
+    public String getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(String origin) {
+        this.origin = origin;
+    }
+
+    public String getCountry_code() {
+        return country_code;
+    }
+
+    public void setCountry_code(String country_code) {
+        this.country_code = country_code;
+    }
+
     public String getLife_span() {
         return life_span;
     }
@@ -78,19 +120,19 @@ public class Dog {
         this.temperament = temperament;
     }
 
-    public List<String> getWeight() {
+    public Map<String, Object> getWeight() {
         return weight;
     }
 
-    public void setWeight(List<String> weight) {
+    public void setWeight(Map<String, Object> weight) {
         this.weight = weight;
     }
 
-    public List<String> getHeight() {
+    public Map<String, Object> getHeight() {
         return height;
     }
 
-    public void setHeight(List<String> height) {
+    public void setHeight(Map<String, Object> height) {
         this.height = height;
     }
 }
