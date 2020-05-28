@@ -2,23 +2,41 @@ package com.teste.canilroomviewmodel.view;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.PermissionChecker;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.teste.canilroomviewmodel.R;
 import com.teste.canilroomviewmodel.database.Dog;
+import com.teste.canilroomviewmodel.database.DogImageUrl;
 import com.teste.canilroomviewmodel.databinding.FragmentDogDetailsBinding;
 import com.teste.canilroomviewmodel.retrofit.RetrofitConfig;
+import com.teste.canilroomviewmodel.viewModel.DogDetailsViewModel;
+
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -30,7 +48,10 @@ public class DogDetailsFragment extends Fragment {
     private FragmentDogDetailsBinding binding;
     private RetrofitConfig retrofitConfig;
     private Call<Dog> dogCall;
+    private Dog thisDog;
+    private Call<List<DogImageUrl>> dogImageUrlCall;
     private String idToSearch;
+    private DogDetailsViewModel dogDetailsViewModel;
 
     public DogDetailsFragment() {
     }
@@ -49,53 +70,51 @@ public class DogDetailsFragment extends Fragment {
         binding = FragmentDogDetailsBinding.inflate(getLayoutInflater(), container, false);
         View rootView = binding.getRoot();
 
-        retrofitConfig = new RetrofitConfig();
+        if (getActivity() == null){
+            return rootView;
+        }
 
-        if (getActivity() != null && getContext() != null) {
+        dogDetailsViewModel = ViewModelProvider.AndroidViewModelFactory.getInstance(getActivity().getApplication()).create(DogDetailsViewModel.class);
+
+        if (getContext() != null) {
             if (PermissionChecker.checkSelfPermission(getContext(), Manifest.permission.INTERNET) != PermissionChecker.PERMISSION_GRANTED) {
                 ActivityCompat.requestPermissions(getActivity(), new String[]{Manifest.permission.INTERNET}, 1);
             } else {
-                startAPI();
+                setDataFromAPI();
             }
         }
 
         return rootView;
     }
 
-    private void startAPI() {
-        dogCall = retrofitConfig.getDogAPI().getDogById(Integer.parseInt(idToSearch));
-        dogCall.enqueue(new Callback<Dog>() {
-            @Override
-            public void onResponse(Call<Dog> call, Response<Dog> response) {
-                Dog dogById = response.body();
-                if (dogById != null) {
-                    binding.dogDetailsTextViewDogName.setText(dogById.getName());
-                    binding.dogDetailsTextViewDogCountryCode.setText(dogById.getCountry_code());
-                    binding.dogDetailsTextViewDogLifeSpan.setText(dogById.getLife_span());
-                    binding.dogDetailsTextViewDogWeight.setText(String.valueOf(dogById.getWeight().get(Dog.MeasureInMetric)));
-                    binding.dogDetailsTextViewDogHeight.setText(String.valueOf(dogById.getHeight().get(Dog.MeasureInMetric)));
-                    binding.dogDetailsTextViewDogBreedGroup.setText(dogById.getBreed_group());
-                }
-                Log.e(TAG, "Response code: " + response.code());
-            }
-
-            @Override
-            public void onFailure(Call<Dog> call, Throwable t) {
-                Log.e(TAG, "Failed to retrieve info from API\n" + t.getMessage());
-            }
-        });
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == 1) {
             if (grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                startAPI();
+                setDataFromAPI();
             } else {
                 Toast.makeText(getContext(), "Internet permission not granted", Toast.LENGTH_SHORT).show();
             }
         } else {
             super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         }
+    }
+
+    private void setDataFromAPI() {
+        dogDetailsViewModel.getDogMutableLiveData(idToSearch).observe(getViewLifecycleOwner(), dog -> {
+            if (dog != null) {
+                binding.dogDetailsTextViewDogName.setText(dog.getName());
+                binding.dogDetailsTextViewDogCountryCode.setText((dog.getCountry_code() == null || dog.getCountry_code().isEmpty())?"Not available":dog.getCountry_code());
+                binding.dogDetailsTextViewDogLifeSpan.setText(dog.getLife_span());
+                binding.dogDetailsTextViewDogWeight.setText(String.valueOf(dog.getWeight().get(Dog.MeasureInMetric)));
+                binding.dogDetailsTextViewDogHeight.setText(String.valueOf(dog.getHeight().get(Dog.MeasureInImperial)));
+                binding.dogDetailsTextViewDogBreedGroup.setText((dog.getBreed_group() == null || dog.getBreed_group().isEmpty())?"Not available":dog.getBreed_group());
+            }
+        });
+        dogDetailsViewModel.getBitmapMutableLiveData(idToSearch).observe(getViewLifecycleOwner(), bitmap -> {
+            if (bitmap != null){
+                binding.dogDetailsImageViewDogPhoto.setImageBitmap(bitmap);
+            }
+        });
     }
 }

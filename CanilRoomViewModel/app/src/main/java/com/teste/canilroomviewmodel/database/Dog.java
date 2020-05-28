@@ -26,6 +26,7 @@ public class Dog implements Serializable {
     private String description;
     private String life_span;
     private String temperament;
+    private String url;
     @JsonProperty("weight")
     private Map<String, Object> weight = new HashMap<>();
     @JsonProperty("height")
@@ -34,7 +35,7 @@ public class Dog implements Serializable {
     public Dog() {
     }
 
-    public Dog(String id, String name, String bred_for, String breed_group, String origin, String country_code, String description, String life_span, String temperament, Map<String, Object> weight, Map<String, Object> height) {
+    public Dog(String id, String name, String bred_for, String breed_group, String origin, String country_code, String description, String life_span, String temperament, String url, Map<String, Object> weight, Map<String, Object> height) {
         this.id = id;
         this.name = name;
         this.bred_for = bred_for;
@@ -44,20 +45,13 @@ public class Dog implements Serializable {
         this.description = description;
         this.life_span = life_span;
         this.temperament = temperament;
+        this.url = url;
         this.weight = weight;
         this.height = height;
     }
 
     public String getId() {
         return id;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
     }
 
     public void setId(String id) {
@@ -104,6 +98,14 @@ public class Dog implements Serializable {
         this.country_code = country_code;
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
     public String getLife_span() {
         return life_span;
     }
@@ -118,6 +120,14 @@ public class Dog implements Serializable {
 
     public void setTemperament(String temperament) {
         this.temperament = temperament;
+    }
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public Map<String, Object> getWeight() {
