@@ -14,11 +14,4 @@ import retrofit2.http.Query;
 public interface MarsWeatherAPI {
     @GET("weather/latest")
     Observable<WeatherStatus> getLatestWeatherStatus();
-
-    @GET("rovers/curiosity/photos")
-    Observable<MarsPhoto> getLatestPhotos(@Query("earth_date") String date, @Query("camera") String camera);
-
-
-    @GET("rovers/curiosity/photos")
-    Observable<MarsPhoto> getLatestPhotosWithoutCamera(@Query("earth_date") String date);
 }

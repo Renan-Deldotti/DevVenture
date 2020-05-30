@@ -2,13 +2,16 @@ package com.teste.marsweather.model;
 
 import android.util.Log;
 
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.teste.marsweather.retrofit.RetrofitConfig;
+import com.teste.marsweather.dependecyInjection.DaggerRetrofitPhotoComponent;
+import com.teste.marsweather.retrofit.MarsWeatherAPI;
+import com.teste.marsweather.retrofit.PhotoApi;
 
 import java.util.Random;
+
+import javax.inject.Inject;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observer;
@@ -21,13 +24,22 @@ public class WeatherStatusViewModel extends ViewModel {
 
     private static final String TAG = WeatherStatusViewModel.class.getSimpleName();
     public MutableLiveData<WeatherStatus> weatherStatusMutableLiveData = new MutableLiveData<>();
-    public MutableLiveData<MarsPhoto> marsPhotoMutableLiveData = new MutableLiveData<>();
     public MutableLiveData<String> photoUrl = new MutableLiveData<>();
-    private RetrofitConfig retrofitConfigWeather = new RetrofitConfig();
-    private RetrofitConfig retrofitConfigPhoto = new RetrofitConfig(true);
+
+    @Inject
+    MarsWeatherAPI marsWeatherAPI;
+
+    @Inject
+    PhotoApi photoApi;
+
+    public WeatherStatusViewModel() {
+        DaggerRetrofitPhotoComponent.create().inject(this);
+    }
+
+    public String mUrl = "";
 
     public void getLatestWeather() {
-        retrofitConfigWeather.getMarsWeatherAPI().getLatestWeatherStatus()
+        marsWeatherAPI.getLatestWeatherStatus()
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .map(new Function<WeatherStatus, WeatherStatus>() {
@@ -63,22 +75,21 @@ public class WeatherStatusViewModel extends ViewModel {
                 });
     }
 
-    public void getMarsPhoto(){
-        //marsPhotoMutableLiveData = retrofitConfigPhoto.getMarsWeatherAPI().getLatestPhotos();
-        retrofitConfigPhoto.getMarsWeatherAPI().getLatestPhotosWithoutCamera("2020-5-29")
+    public void getMarsPhoto() {
+        photoApi.getLatestPhotosWithoutCamera("2020-5-29")
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<MarsPhoto>() {
                     @Override
                     public void accept(MarsPhoto marsPhoto) throws Throwable {
-                        Log.e(TAG,"Number of photos :"+marsPhoto.getPhotos().size());
+                        Log.e(TAG, "Number of photos :" + marsPhoto.getPhotos().size());
 
                         int imageToSearch = new Random().nextInt(30);
-                        Log.e(TAG,"Image id to find: "+imageToSearch);
+                        Log.e(TAG, "Image id to find: " + imageToSearch);
 
                         String url = marsPhoto.getPhotos().get(imageToSearch).getImg_src();
-                        Log.e(TAG,"This photo url: "+url);
-
+                        Log.e(TAG, "This photo url: " + url);
+                        mUrl = url;
                         photoUrl.postValue(url);
                     }
                 });

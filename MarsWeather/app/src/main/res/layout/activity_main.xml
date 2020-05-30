@@ -5,9 +5,14 @@
     tools:context=".view.MainActivity">
 
     <data>
+
         <variable
             name="weatherStatus"
             type="com.teste.marsweather.model.WeatherStatus" />
+
+        <variable
+            name="marsPhoto"
+            type="String" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,15 +21,16 @@
 
         <ImageView
             android:id="@+id/imageView"
+            image_url="@{marsPhoto}"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:contentDescription="@string/background"
             android:scaleType="centerCrop"
-            android:src="@drawable/mars_placeholder"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:background="@drawable/mars_placeholder" />
 
         <TextView
             android:id="@+id/textView_season"
@@ -33,7 +39,8 @@
             android:layout_marginTop="24dp"
             android:text="@{weatherStatus.season}"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="SUMMER" />
 
         <TextView
             android:id="@+id/textView_tempAvarage"
@@ -44,6 +51,7 @@
             android:layout_marginEnd="24dp"
             android:text="@{String.valueOf(weatherStatus.air.temperature.average).concat(`°F`)}"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="45ºC" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
