@@ -1,5 +1,7 @@
 package com.teste.marsweather.retrofit;
 
+import androidx.lifecycle.MutableLiveData;
+
 import com.teste.marsweather.model.WeatherStatus;
 
 import io.reactivex.rxjava3.core.Observable;
