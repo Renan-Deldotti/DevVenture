@@ -71,7 +71,14 @@ public class WeatherStatusViewModel extends ViewModel {
                 .subscribe(new Consumer<MarsPhoto>() {
                     @Override
                     public void accept(MarsPhoto marsPhoto) throws Throwable {
-                        String url = marsPhoto.getPhotos().get(0).getImg_src();
+                        Log.e(TAG,"Number of photos :"+marsPhoto.getPhotos().size());
+
+                        int imageToSearch = new Random().nextInt(30);
+                        Log.e(TAG,"Image id to find: "+imageToSearch);
+
+                        String url = marsPhoto.getPhotos().get(imageToSearch).getImg_src();
+                        Log.e(TAG,"This photo url: "+url);
+
                         photoUrl.postValue(url);
                     }
                 });

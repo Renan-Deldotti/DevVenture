@@ -50,11 +50,6 @@ public class MainActivity extends AppCompatActivity {
         binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
         viewModel = new ViewModelProvider(this).get(WeatherStatusViewModel.class);
         viewModel.getLatestWeather();
-
-        int imageToSearch = new Random().nextInt(10);
-        Log.e(TAG,"Image id to find: "+imageToSearch);
-
-        viewModel.getMarsPhoto();
         receiveWeatherStatus();
     }
 
@@ -87,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         if (item.getItemId() == R.id.getPhotos) {
+            viewModel.getMarsPhoto();
             receivePhoto();
             return true;
         } else {
