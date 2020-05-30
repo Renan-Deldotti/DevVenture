@@ -24,7 +24,7 @@ public class MarsPhoto {
         this.photos = photos;
     }
 
-    public class Photo{
+    public static class Photo{
         private int id;
         private String img_src;
 
